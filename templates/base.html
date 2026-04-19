@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Your Everyday Tools{% endblock %}</title>
+    <meta name="description" content="EveryTools — 51+ everyday utilities for documents, images, text, and more. Self-hosted, no bloat, just tools.">
+    <title>{% block title %}EveryTools{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="/" class="logo"><i class="bi bi-tools"></i> EveryTools</a>
+            <a href="/" class="logo">
+                <span class="logo-mark">ET</span>
+                <span class="logo-text">Every<span>Tools</span></span>
+            </a>
         </div>
         <div class="sidebar-nav">
             {% for cat in tool_categories %}
             <div class="nav-category">
                 <button class="nav-category-btn" onclick="toggleCategory(this)">
-                    <i class="bi {{ cat.icon }}"></i> {{ cat.name }}
+                    <i class="bi {{ cat.icon }} nav-cat-icon"></i>
+                    {{ cat.name }}
                     <i class="bi bi-chevron-down chevron"></i>
                 </button>
                 <div class="nav-items">
                     {% for tool in cat.tools %}
                     <a href="/{{ cat.id }}/{{ tool.id }}" class="nav-item">
-                        <i class="bi {{ tool.icon }}"></i> {{ tool.name }}
+                        <i class="bi {{ tool.icon }}"></i>
+                        {{ tool.name }}
                     </a>
                     {% endfor %}
                 </div>
@@ -35,8 +43,22 @@
 
     <main class="main-content">
         <header class="top-bar">
-            <button class="menu-btn" onclick="openSidebar()"><i class="bi bi-list"></i></button>
-            <span class="top-title">{% block top_title %}Your Everyday Tools{% endblock %}</span>
+            <button class="menu-btn" id="menu-btn" onclick="openSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            {% if request.path != '/' %}
+            <a href="/" class="top-bar-back" title="Back to all tools">
+                <i class="bi bi-arrow-left"></i>
+                <span>All Tools</span>
+            </a>
+            <span class="path-sep">/</span>
+            {% endif %}
+            <div class="top-bar-path">
+                <span>everytools</span>
+                <span class="path-sep">/</span>
+                <span class="path-current">{% block top_title %}home{% endblock %}</span>
+            </div>
+            <div class="top-bar-spacer"></div>
         </header>
         <div class="content-area">
             {% block content %}{% endblock %}

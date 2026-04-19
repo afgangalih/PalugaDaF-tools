@@ -1,16 +1,13 @@
 {% extends "base.html" %}
-{% block title %}Your Everyday Tools{% endblock %}
+{% block title %}EveryTools — Your Everyday Utilities{% endblock %}
+{% block top_title %}home{% endblock %}
 
 {% block content %}
-<div class="home-hero">
-    <h1>Your Everyday Tools</h1>
-    <p>All the utilities you need, in one place.</p>
-</div>
-
 {% for cat in tool_categories %}
 <div class="category-section">
-    <div class="category-title">
-        <i class="bi {{ cat.icon }}"></i> {{ cat.name }}
+    <div class="category-title" data-count="{{ cat.tools|length }} tools">
+        <i class="bi {{ cat.icon }}"></i>
+        {{ cat.name }}
     </div>
     <div class="tools-grid">
         {% for tool in cat.tools %}
@@ -19,6 +16,10 @@
             <div class="card-body">
                 <h3>{{ tool.name }}</h3>
                 <p>{{ tool.desc }}</p>
+            </div>
+            <div class="card-arrow">
+                <span>OPEN</span>
+                <i class="bi bi-arrow-right"></i>
             </div>
         </a>
         {% endfor %}

@@ -5,6 +5,7 @@
 {% block content %}
 <div class="tool-page">
     <div class="tool-header">
+        <div class="tool-header-label">{{ request.path.split('/')|reject('equalto', '')|first|upper }}</div>
         <h1>{{ title }}</h1>
         <p>{{ description }}</p>
     </div>
