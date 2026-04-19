@@ -1,2 +1,6 @@
-git add .
-git reset README.md
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.agents/
